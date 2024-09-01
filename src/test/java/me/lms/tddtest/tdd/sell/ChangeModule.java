@@ -10,7 +10,7 @@ public class ChangeModule {
         }
     }
 
-    public CoinSet getChangeCoinSet(int changeAmount){
+    public CoinSet getChangeCoinSetModule(int changeAmount){
         CoinSet coinSet = new CoinSet();
         for(COIN coin : COIN.values()){
             while(changeAmount >= coin.value){

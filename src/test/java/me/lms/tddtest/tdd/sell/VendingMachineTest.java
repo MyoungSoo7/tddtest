@@ -40,7 +40,6 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(1000);
         assertEquals(3000, vendingMachine.getChangeAmount());
     }
-
     @Test
     public void 잔액만큼_최소동전으로_거스름돈_반환(){
         VendingMachine vendingMachine = new VendingMachine();
@@ -48,13 +47,11 @@ public class VendingMachineTest {
         vendingMachine.insertCoin(100);
         vendingMachine.insertCoin(500);
         vendingMachine.selectDrink(new Drink("콜라", 650));
-
-        CoinSet expectedCoinSet = new CoinSet();
-        expectedCoinSet.add(50);
-        assertEquals(expectedCoinSet, vendingMachine.getChangeCoinSet());
+        CoinSet expectedCoinSetModule = new CoinSet();
+        expectedCoinSetModule.add(50);
+        assertEquals(expectedCoinSetModule, vendingMachine.getChangeCoinSetModule(vendingMachine.getChangeAmount()));
 
     }
-
     // CoinSet 클래스와 잔돈계산 메소드의 문제( ChangeModule, CoinSet)
     @Test
     @DisplayName("거스름돈")
@@ -62,7 +59,7 @@ public class VendingMachineTest {
         ChangeModule changeModule = new ChangeModule();
         CoinSet expectedCoinSet = new CoinSet();
         expectedCoinSet.add(50);
-        assertEquals(expectedCoinSet, changeModule.getChangeCoinSet(50));
+        assertEquals(expectedCoinSet, changeModule.getChangeCoinSetModule(50));
 
     }
 

@@ -4,6 +4,12 @@ package me.lms.tddtest.tdd.sell;
 public class VendingMachine {
 
     private int changeAmount;
+    private ChangeModule changeModule;
+
+    public VendingMachine(){
+        this.changeAmount = 0;
+        this.changeModule = new ChangeModule();
+    }
 
     public void insertCoin(int coin){
         this.changeAmount += coin;
@@ -17,16 +23,9 @@ public class VendingMachine {
         this.changeAmount -= drink.getPrice();
     }
 
-    public CoinSet getChangeCoinSet(){
-        CoinSet coinSet = new CoinSet();
-        int[] coins = {500, 100, 50, 10};
-        for(int coin : coins){
-            while(this.changeAmount >= coin){
-                this.changeAmount -= coin;
-                coinSet.add(coin);
-            }
-        }
-        return coinSet;
+    public CoinSet getChangeCoinSetModule(int changeAmount){
+        this.changeAmount = changeAmount;
+        return changeModule.getChangeCoinSetModule(changeAmount);
     }
 
 }
