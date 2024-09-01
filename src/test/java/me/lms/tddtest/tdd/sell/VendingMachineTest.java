@@ -26,12 +26,12 @@ public class VendingMachineTest {
     // 표시되어 있는 금액을 최소 잔돈으로 반환한다.
 
     // 기능
-    // 음료수의 가격 확인
-    // 잔액 확인
-    // 잔돈 반환
+    // 1. 음료수의 가격 확인 (Drink)
+    // 2. 잔액 확인 (CoinSet)
+    // 3. 잔돈 반환 (VenidngMachine)
 
     // 구현범위
-    // 잔액 확인, 잔액만큼 최소 동전으로 거스름돈 반환
+    // 잔액 확인, 잔액만큼 최소 동전으로 거스름돈 반환 (ChangeModule, CoinSet)
 
     @Test
     public void 잔액확인(){
