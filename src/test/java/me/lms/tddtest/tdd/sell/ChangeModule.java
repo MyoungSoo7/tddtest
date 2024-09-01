@@ -12,7 +12,6 @@ public class ChangeModule {
 
     public CoinSet getChangeCoinSet(int changeAmount){
         CoinSet coinSet = new CoinSet();
-        //int remainChangeAmount = changeAmount;
         for(COIN coin : COIN.values()){
             while(changeAmount >= coin.value){
                 changeAmount -= coin.value;
