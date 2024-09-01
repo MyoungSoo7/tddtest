@@ -27,8 +27,8 @@ public class VendingMachineTest {
 
     // 기능
     // 1. 음료수의 가격 확인 (Drink)
-    // 2. 잔액 확인 (CoinSet)
-    // 3. 잔돈 반환 (VenidngMachine)
+    // 2. 잔액 확인 (VenidngMachine)
+    // 3. 잔돈 반환 (CoinSet)
 
     // 구현범위
     // 잔액 확인, 잔액만큼 최소 동전으로 거스름돈 반환 (ChangeModule, CoinSet)
