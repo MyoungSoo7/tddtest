@@ -6,7 +6,7 @@ public class VideoStore {
 
     // 비디오 가게에서 고객이 대여하는 비디오의 대여정보 조회할 수 있는 프로그램
 
-    // [요구사항]
+   /* // [요구사항]
     private String userName; // 고객은 이름을 갖는다.
     private String video; // 고객은 한번에 여러개의 비디오를 대여할 수 있으나 각각의 대여기간은 다를 수 있다.
     private String lendVideo; // 비디오 대여
@@ -19,7 +19,7 @@ public class VideoStore {
     // 다큐멘터리는 3일 이상 대여하면 4일째부터는 1/3 할인
     // 스포츠는 장기대여 할인 없다.
     private int price; // 대여요금
-    private int point; // 포인트 (대여할 때마다 1포인트씩 적립, 스포츠는 2포인트)
+    private int point; // 포인트 (대여할 때마다 1포인트씩 적립, 스포츠는 2포인트)*/
 
     // 요구사항 고객의 현재 총 대여비디오수
 
@@ -81,8 +81,32 @@ public class VideoStore {
     // 시작은 소유기반 클래스부터, 의존성이 낮은 클래스부터 테스트케이스를 만드는 식으로 한다.
     // 소유기반부터 행위기반 클래스까지 테스트 케이스를 만들면서 개발해 나가다보면 통합테스트 수준의 테스트 케이스가 만들어진다.
 
+    private User user;
+    private Video video;
+    private VideoType videoType;
+    private Rental rental;
 
-
+    public VideoStore(User user, Video video, VideoType videoType, Rental rental) {
+        this.user = user;
+        this.video = video;
+        this.videoType = videoType;
+        this.rental = rental;
+    }
+    // 행위기반 클래스 도출
+    // 대여한다.(고객이 비디오를)  고객 -> 대여 -> 영화
+    // 할인된다.(시스템이 비디오 일일 대여가격을)
+    // 누적된다.(시스템이 포인트를)
+    // 계산한다.(시스템이 포인트 총합을)
+    // 계산한다.(시스템이 총 대여가격을)
+    // 계산한다.(시스템이 총 대여비디오 수를)
+    // 제공한다.(시스템이 대여정보를)
+    public Rental lendVideo(Rental rental) {
+        rental.setLendDate(LocalDateTime.now());
+        rental.setReturnDate(LocalDateTime.now().plusDays(rental.getLendDays()));
+        rental.setDiscount(0);
+        rental.setPoint(0);
+        return rental;
+    }
 
 
 
