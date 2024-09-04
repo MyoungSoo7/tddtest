@@ -81,6 +81,8 @@ public class VideoStore {
     private Video video;
     private VideoType videoType;
     private Lend lend;
+    private int discountPeriod = 2;
+    private double discountPercentage = 0.5;
 
     public VideoStore(User user, Video video, VideoType videoType, Lend lend) {
         this.user = user;
@@ -109,7 +111,7 @@ public class VideoStore {
           rentlFeeTotal = (int) this.defaultCharge * discountPeriod;
           rentlFeeTotal += this.defaultCharge * discountPercentage * (rentalPeriod - discountPeriod);
         }
-
+        return rentlFeeTotal;
     }
 
     // 계산한다.(시스템이 총 대여가격을)
