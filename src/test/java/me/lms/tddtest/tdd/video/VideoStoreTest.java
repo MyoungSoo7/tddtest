@@ -4,8 +4,6 @@ package me.lms.tddtest.tdd.video;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VideoStoreTest {
@@ -32,8 +30,24 @@ public class VideoStoreTest {
     private VideoType videoType;
     // 대여한다.(고객이 비디오를)  고객 -> 대여 -> 영화
     @Test
-    public void 고객이_비디오를_대여한다(Rental rental){
-       rental.setLendDate(LocalDateTime.now());
+    public void 비디오정보를_가져온다(){
+        String inputVideoType =VideoType.MOVIE.toString();
+        String inputVideoName ="If only";
+        int inputPrice = 1000;
+
+        Video video = new Video(inputVideoType,inputVideoName,inputPrice);
+        String outputVideoName = video.getTitle();
+        String outputVideoType = video.getCategory();
+        int outputPrice = video.getPrice();
+
+        assertEquals(inputVideoName,outputVideoName);
+        assertEquals(inputVideoType,outputVideoType);
+        assertEquals(inputPrice,outputPrice);
+    }
+
+
+    @Test
+    public void 고객이_비디오를_대여한다(Lend lend){
 
 
     }

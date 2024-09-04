@@ -1,7 +1,5 @@
 package me.lms.tddtest.tdd.video;
 
-import java.time.LocalDateTime;
-
 public class VideoStore {
 
     // 비디오 가게에서 고객이 대여하는 비디오의 대여정보 조회할 수 있는 프로그램
@@ -32,15 +30,6 @@ public class VideoStore {
     // 복합 한자어는 유심히 봐서 분리 가능한지 확인해서 풀어쓰면 더 좋다. (대여요금 -> 대여시에 발생하는 요금)
     // 상호작용을 유심히 관찰한다. (시스템의 행위인가? 고객의 행위인가?)
     // 구어체는 좀 더 명확한 의미를 가진 문어체로 변경한다. (구한다 -> 화면에 보여준다. 계산한다. 저장한다 , 올라간다 -> 증가한다. 누적한다.)
-
-    // * 업무규칙 *
-    // - 고객은 한 번에 여러개의 비디오를 대여할 수 있다.
-    // - 대여기간은 비디오마다 각각 다를 수 있다.
-    // * 업무규칙 *
-    // - 비디오에는 종류가 있다.
-    // - 현재 비디오의 종류는 영화, 스포츠, 다큐멘터리의 세 종류다.
-    // * 업무규칙 *
-    // - 영화는 대여기간이 n일 이상이 되면 m일 째부터는 대여요금이 p로 할인된다.
 
     // * 업무규칙 *
     // 고객은 이름을 갖는다.
@@ -81,32 +70,69 @@ public class VideoStore {
     // 시작은 소유기반 클래스부터, 의존성이 낮은 클래스부터 테스트케이스를 만드는 식으로 한다.
     // 소유기반부터 행위기반 클래스까지 테스트 케이스를 만들면서 개발해 나가다보면 통합테스트 수준의 테스트 케이스가 만들어진다.
 
+
+
+
+    // 행위기반 클래스 도출
+    private int rentalPeriod;
+    private int defaultCharge = 1000;
+    private int NO_DATA = 0;
     private User user;
     private Video video;
     private VideoType videoType;
-    private Rental rental;
+    private Lend lend;
 
-    public VideoStore(User user, Video video, VideoType videoType, Rental rental) {
+    public VideoStore(User user, Video video, VideoType videoType, Lend lend) {
         this.user = user;
         this.video = video;
         this.videoType = videoType;
-        this.rental = rental;
+        this.lend = lend;
     }
-    // 행위기반 클래스 도출
+
     // 대여한다.(고객이 비디오를)  고객 -> 대여 -> 영화
-    // 할인된다.(시스템이 비디오 일일 대여가격을)
-    // 누적된다.(시스템이 포인트를)
-    // 계산한다.(시스템이 포인트 총합을)
-    // 계산한다.(시스템이 총 대여가격을)
+    public Video lendVideo(User user, Video video){
+        /*User user = new User("lms");
+        Video video = new Video("movie","If only",1000);*/
+        return video;
+    }
+
+
     // 계산한다.(시스템이 총 대여비디오 수를)
     // 제공한다.(시스템이 대여정보를)
-    public Rental lendVideo(Rental rental) {
-        rental.setLendDate(LocalDateTime.now());
-        rental.setReturnDate(LocalDateTime.now().plusDays(rental.getLendDays()));
-        rental.setDiscount(0);
-        rental.setPoint(0);
-        return rental;
+    // 할인된다.(시스템이 비디오 일일 대여가격을)
+    // 누적된다.(시스템이 포인트를)
+    public int calcRentalFee(int rentalPeriod){
+        int rentlFeeTotal =0;
+        if(rentalPeriod <= discountPeriod){
+            rentlFeeTotal = defaultCharge * rentalPeriod;
+        }else{
+          rentlFeeTotal = (int) this.defaultCharge * discountPeriod;
+          rentlFeeTotal += this.defaultCharge * discountPercentage * (rentalPeriod - discountPeriod);
+        }
+
     }
+
+    // 계산한다.(시스템이 총 대여가격을)
+    public int getCharge(){
+        int result =0;
+        if(rentalPeriod >2 ){
+            result = (defaultCharge * 2) + (rentalPeriod -2) * (defaultCharge /2 );
+        }else{
+            result = defaultCharge * rentalPeriod;
+        }
+        return result;
+    }
+    // 계산한다.(시스템이 포인트 총합을)
+    public int getPoint(User user){
+        /*for(int i=0; i< users.size(); i++){
+            User customer = user.getName;
+            if(customer.equals(c)){
+                return c.getPoint();
+            }
+        }*/
+        return NO_DATA;
+    }
+
 
 
 

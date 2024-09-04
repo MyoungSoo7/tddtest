@@ -2,7 +2,7 @@ package me.lms.tddtest.tdd.video;
 
 import java.time.LocalDateTime;
 
-public class Rental {
+public class Lend {
 
     private LocalDateTime lendDate;
     private LocalDateTime returnDate;
@@ -10,7 +10,7 @@ public class Rental {
     private int point;
     private int lendDays;
 
-    public Rental(LocalDateTime lendDate, LocalDateTime returnDate, int lendDays, int discount, int point) {
+    public Lend(LocalDateTime lendDate, LocalDateTime returnDate, int lendDays, int discount, int point) {
         this.lendDate = lendDate;
         this.returnDate = returnDate;
         this.lendDays = lendDays;

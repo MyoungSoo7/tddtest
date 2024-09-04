@@ -5,6 +5,29 @@ public class Video {
     private String category;
     private String title;
     private int price;
+    private int period;
+
+    public Video(String category, String title, int price) {
+        this.category = category;
+        this.title = title;
+        this.price = price;
+    }
+
+    public Video(String category, String title, int price, int period) {
+        this.category = category;
+        this.title = title;
+        this.price = price;
+        this.period = period;
+    }
+
+    public void initalize(){
+        if(period >= 3){
+            price = ((price/2) /100) * 100;
+        }
+        if(period == 3){
+            price = price/3;
+        }
+    }
 
     public String getCategory() {
         return category;
