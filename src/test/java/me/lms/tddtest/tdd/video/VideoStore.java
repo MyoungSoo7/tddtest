@@ -70,9 +70,6 @@ public class VideoStore {
     // 시작은 소유기반 클래스부터, 의존성이 낮은 클래스부터 테스트케이스를 만드는 식으로 한다.
     // 소유기반부터 행위기반 클래스까지 테스트 케이스를 만들면서 개발해 나가다보면 통합테스트 수준의 테스트 케이스가 만들어진다.
 
-
-
-
     // 행위기반 클래스 도출
     private int rentalPeriod;
     private int defaultCharge = 1000;
@@ -98,11 +95,29 @@ public class VideoStore {
         return video;
     }
 
+    // 계산한다.(시스템이 총 대여가격을)
+    public int getCharge(){
+        int result =0;
+        if(rentalPeriod >2 ){
+            result = (defaultCharge * 2) + (rentalPeriod -2) * (defaultCharge /2 );
+        }else{
+            result = defaultCharge * rentalPeriod;
+        }
+        return result;
+    }
 
-    // 계산한다.(시스템이 총 대여비디오 수를)
-    // 제공한다.(시스템이 대여정보를)
+    // 계산한다.(시스템이 포인트 총합을)
+    public int getPoint(User user){
+        /*for(int i=0; i< users.size(); i++){
+            User customer = user.getName;
+            if(customer.equals(c)){
+                return c.getPoint();
+            }
+        }*/
+        return NO_DATA;
+    }
+
     // 할인된다.(시스템이 비디오 일일 대여가격을)
-    // 누적된다.(시스템이 포인트를)
     public int calcRentalFee(int rentalPeriod){
         int rentlFeeTotal =0;
         if(rentalPeriod <= discountPeriod){
@@ -114,26 +129,10 @@ public class VideoStore {
         return rentlFeeTotal;
     }
 
-    // 계산한다.(시스템이 총 대여가격을)
-    public int getCharge(){
-        int result =0;
-        if(rentalPeriod >2 ){
-            result = (defaultCharge * 2) + (rentalPeriod -2) * (defaultCharge /2 );
-        }else{
-            result = defaultCharge * rentalPeriod;
-        }
-        return result;
-    }
-    // 계산한다.(시스템이 포인트 총합을)
-    public int getPoint(User user){
-        /*for(int i=0; i< users.size(); i++){
-            User customer = user.getName;
-            if(customer.equals(c)){
-                return c.getPoint();
-            }
-        }*/
-        return NO_DATA;
-    }
+    // 계산한다.(시스템이 총 대여비디오 수를)
+    // 제공한다.(시스템이 대여정보를)
+    // 누적된다.(시스템이 포인트를)
+
 
 
 
