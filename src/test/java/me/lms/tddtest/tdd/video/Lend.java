@@ -10,6 +10,15 @@ public class Lend {
     private int point;
     private int lendDays;
 
+
+    public Lend(User user , Video video){
+        this.lendDate = LocalDateTime.now();
+        this.returnDate = null;
+        this.lendDays = 1;
+        this.discount = 0;
+        this.point = 0;
+    }
+
     public Lend(LocalDateTime lendDate, LocalDateTime returnDate, int lendDays, int discount, int point) {
         this.lendDate = lendDate;
         this.returnDate = returnDate;
@@ -56,5 +65,16 @@ public class Lend {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    @Override
+    public String toString() {
+        return "Lend{" +
+                "lendDate=" + lendDate +
+                ", returnDate=" + returnDate +
+                ", discount=" + discount +
+                ", point=" + point +
+                ", lendDays=" + lendDays +
+                '}';
     }
 }

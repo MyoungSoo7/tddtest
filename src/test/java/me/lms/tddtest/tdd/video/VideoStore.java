@@ -80,6 +80,7 @@ public class VideoStore {
     private Lend lend;
     private int discountPeriod = 2;
     private double discountPercentage = 0.5;
+    private int period;
 
     public VideoStore(User user, Video video, VideoType videoType, Lend lend) {
         this.user = user;
@@ -89,11 +90,18 @@ public class VideoStore {
     }
 
     // 대여한다.(고객이 비디오를)  고객 -> 대여 -> 영화
-    public Video lendVideo(User user, Video video){
-        /*User user = new User("lms");
-        Video video = new Video("movie","If only",1000);*/
-        return video;
+    public Lend lendVideo(User user, Video video){
+        Lend lend = new Lend(user,video);
+        return lend;
     }
+    /*public void initalize(){
+        if(period >= 3){
+            price = ((price/2) /100) * 100;
+        }
+        if(period == 3){
+            price = price/3;
+        }
+    }*/
 
     // 계산한다.(시스템이 총 대여가격을)
     public int getCharge(){

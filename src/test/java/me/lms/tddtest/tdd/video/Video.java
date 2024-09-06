@@ -20,14 +20,6 @@ public class Video {
         this.period = period;
     }
 
-    public void initalize(){
-        if(period >= 3){
-            price = ((price/2) /100) * 100;
-        }
-        if(period == 3){
-            price = price/3;
-        }
-    }
 
     public String getCategory() {
         return category;
