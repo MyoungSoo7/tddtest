@@ -9,19 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VideoStoreTest {
 
 
-
-    // 행위기반 클래스 도출
-   /* @BeforeAll
-    public static void setUp(){
-        User user = new User("lms");
-        Video video = new Video();
-        video.setTitle("movie");
-        video.setPrice(1000);
-    }*/
-
-    private User user;
-    private Video video;
-    private VideoType videoType;
     // 대여한다.(고객이 비디오를)  고객 -> 대여 -> 영화
     @Test
     public void 비디오정보를_가져온다(){
@@ -41,7 +28,6 @@ public class VideoStoreTest {
 
 
     // 대여한다.(고객이 비디오를)  고객 -> 대여 -> 영화
-
     @Test
     public void 고객이_비디오를_대여한다(){
         String inputUserName = "lms";
@@ -53,11 +39,10 @@ public class VideoStoreTest {
         Video video = new Video(inputVideoType,inputVideoName,inputPrice);
         VideoStore videoStore = new VideoStore(user,video,videoType,null);
         Lend lend = videoStore.lendVideo(user,video);
-        if(video.getCategory().equals(VideoType.MOVIE.toString())){
-            
-        }
+        // 영화는 2일이상되면 3일 째부터 1/2할인
+        // 영화는 1개 대여 1포인트
 
-        System.out.println("lend.getUser().getName() = " + lend.toString());
+
     }
 
     // 할인된다.(시스템이 비디오 일일 대여가격을)

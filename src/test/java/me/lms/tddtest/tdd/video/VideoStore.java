@@ -72,7 +72,7 @@ public class VideoStore {
 
     // 행위기반 클래스 도출
     private int rentalPeriod;
-    private int defaultCharge = 1000;
+
     private int NO_DATA = 0;
     private User user;
     private Video video;
@@ -94,52 +94,46 @@ public class VideoStore {
         Lend lend = new Lend(user,video);
         return lend;
     }
-    /*public void initalize(){
-        if(period >= 3){
-            price = ((price/2) /100) * 100;
-        }
-        if(period == 3){
-            price = price/3;
-        }
-    }*/
 
-    // 계산한다.(시스템이 총 대여가격을)
-    public int getCharge(){
-        int result =0;
-        if(rentalPeriod >2 ){
-            result = (defaultCharge * 2) + (rentalPeriod -2) * (defaultCharge /2 );
-        }else{
-            result = defaultCharge * rentalPeriod;
-        }
-        return result;
-    }
-
-    // 계산한다.(시스템이 포인트 총합을)
-    public int getPoint(User user){
-        /*for(int i=0; i< users.size(); i++){
-            User customer = user.getName;
-            if(customer.equals(c)){
-                return c.getPoint();
-            }
-        }*/
-        return NO_DATA;
-    }
-
-    // 할인된다.(시스템이 비디오 일일 대여가격을)
-    public int calcRentalFee(int rentalPeriod){
+    public int calcRentalFee(int defaultCharge , int rentalPeriod){
         int rentlFeeTotal =0;
+        // 할인된다.(시스템이 비디오 일일 대여가격을)
         if(rentalPeriod <= discountPeriod){
             rentlFeeTotal = defaultCharge * rentalPeriod;
+         // 계산한다.(시스템이 총 대여가격을)
         }else{
-          rentlFeeTotal = (int) this.defaultCharge * discountPeriod;
-          rentlFeeTotal += this.defaultCharge * discountPercentage * (rentalPeriod - discountPeriod);
+            rentlFeeTotal = (int) defaultCharge * discountPeriod;
+            rentlFeeTotal += defaultCharge * discountPercentage * (rentalPeriod - discountPeriod);
         }
         return rentlFeeTotal;
     }
 
+
+    // 계산한다.(시스템이 포인트 총합을)
+    public int getPoint(User user, String type){
+        int point = 0;
+        if(type.equals("sport")){
+            point = 2;
+        }else{
+            point = 1;
+        }
+        return point;
+    }
+
     // 계산한다.(시스템이 총 대여비디오 수를)
+    public int getTotalVideoCount(User user){
+        return user.getLendVideoCount();
+    }
+
     // 제공한다.(시스템이 대여정보를)
+    public Video getVideoInfo(Video video){
+        return video;
+    }
+
     // 누적된다.(시스템이 포인트를)
+    public int getPointTotal(int point){
+        return point;
+    }
 
 
 
