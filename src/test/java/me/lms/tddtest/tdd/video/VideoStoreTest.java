@@ -74,7 +74,6 @@ public class VideoStoreTest {
     // 할인된다.(시스템이 비디오 일일 대여가격을)
     @Test
     public void 시스템이_비디오_할인되는_일일_대여가격을_계산한다(){
-        videoStore= new VideoStore(user);
         int moviePrice = videoStore.calcRentalFee(video.getPrice(), 5, 2, 0.5);
         int documentaryPrice = videoStore.calcRentalFee(video2.getPrice(), 5, 3, 0.3);
         int sportPrice = videoStore.calcRentalFee(video3.getPrice(), 5, 5, 0);
