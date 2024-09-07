@@ -9,22 +9,28 @@ public class Lend {
     private int discount;
     private int point;
     private int lendDays;
-
+    private int lendVideoCount;
 
     public Lend(User user , Video video){
         this.lendDate = LocalDateTime.now();
         this.returnDate = null;
         this.lendDays = 1;
         this.discount = 0;
-        this.point = 0;
+        if(video.getCategory().equals(VideoType.SPORTS.toString())){
+            this.point = 2;
+        }else{
+            this.point = 1;
+        }
+        this.lendVideoCount = 1;
     }
 
-    public Lend(LocalDateTime lendDate, LocalDateTime returnDate, int lendDays, int discount, int point) {
+    public Lend(LocalDateTime lendDate, LocalDateTime returnDate, int lendDays, int discount, int point , int lendVideoCount) {
         this.lendDate = lendDate;
         this.returnDate = returnDate;
         this.lendDays = lendDays;
         this.discount = discount;
         this.point = point;
+        this.lendVideoCount = lendVideoCount+1;
     }
 
     public LocalDateTime getLendDate() {
@@ -65,6 +71,10 @@ public class Lend {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public int getLendVideoCount() {
+        return lendVideoCount;
     }
 
     @Override

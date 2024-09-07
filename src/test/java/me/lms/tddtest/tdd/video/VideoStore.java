@@ -71,31 +71,26 @@ public class VideoStore {
     // 소유기반부터 행위기반 클래스까지 테스트 케이스를 만들면서 개발해 나가다보면 통합테스트 수준의 테스트 케이스가 만들어진다.
 
     // 행위기반 클래스 도출
-    private int rentalPeriod;
-
-    private int NO_DATA = 0;
     private User user;
     private Video video;
-    private VideoType videoType;
     private Lend lend;
-    private int discountPeriod = 2;
-    private double discountPercentage = 0.5;
-    private int period;
 
-    public VideoStore(User user, Video video, VideoType videoType, Lend lend) {
+    public VideoStore(User user) {
+        this.user = user;
+    }
+
+    public VideoStore(User user, Video video) {
         this.user = user;
         this.video = video;
-        this.videoType = videoType;
+    }
+
+    public VideoStore(User user, Video video , Lend lend) {
+        this.user = user;
+        this.video = video;
         this.lend = lend;
     }
 
-    // 대여한다.(고객이 비디오를)  고객 -> 대여 -> 영화
-    public Lend lendVideo(User user, Video video){
-        Lend lend = new Lend(user,video);
-        return lend;
-    }
-
-    public int calcRentalFee(int defaultCharge , int rentalPeriod){
+    public int calcRentalFee(int defaultCharge , int rentalPeriod, int discountPeriod, double discountPercentage){
         int rentlFeeTotal =0;
         // 할인된다.(시스템이 비디오 일일 대여가격을)
         if(rentalPeriod <= discountPeriod){
@@ -103,14 +98,13 @@ public class VideoStore {
          // 계산한다.(시스템이 총 대여가격을)
         }else{
             rentlFeeTotal = (int) defaultCharge * discountPeriod;
-            rentlFeeTotal += defaultCharge * discountPercentage * (rentalPeriod - discountPeriod);
+            rentlFeeTotal += (int) defaultCharge * discountPercentage * (rentalPeriod - discountPeriod);
         }
         return rentlFeeTotal;
     }
 
-
     // 계산한다.(시스템이 포인트 총합을)
-    public int getPoint(User user, String type){
+    public int getPoint(String type){
         int point = 0;
         if(type.equals("sport")){
             point = 2;
@@ -121,8 +115,8 @@ public class VideoStore {
     }
 
     // 계산한다.(시스템이 총 대여비디오 수를)
-    public int getTotalVideoCount(User user){
-        return user.getLendVideoCount();
+    public int getTotalVideoCount(Lend lend){
+        return lend.getLendVideoCount();
     }
 
     // 제공한다.(시스템이 대여정보를)
@@ -136,10 +130,37 @@ public class VideoStore {
     }
 
 
+    public User getUser() {
 
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 
+    public Video getVideo() {
+        return video;
+    }
 
+    public void setVideo(Video video) {
+        this.video = video;
+    }
 
+    public Lend getLend() {
+        return lend;
+    }
 
+    public void setLend(Lend lend) {
+        this.lend = lend;
+    }
+
+    @Override
+    public String toString() {
+        return "VideoStore{" +
+                "user=" + user +
+                ", video=" + video +
+                ", lend=" + lend +
+                '}';
+    }
 }

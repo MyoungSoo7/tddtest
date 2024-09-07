@@ -44,4 +44,14 @@ public class Video {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Video{" +
+                "category='" + category + '\'' +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", period=" + period +
+                '}';
+    }
 }

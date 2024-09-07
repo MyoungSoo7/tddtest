@@ -2,9 +2,9 @@ package me.lms.tddtest.tdd.video;
 
 public class User {
     private String name;
-    private int lendVideoCount;
+    private int point;
 
-    public User(String name ){
+    public User(String name){
         this.name = name;
     }
 
@@ -16,11 +16,19 @@ public class User {
         this.name = name;
     }
 
-    public int getLendVideoCount() {
-        return lendVideoCount;
+    public int getPoint() {
+        return point;
     }
 
-    public void setLendVideoCount(int lendVideoCount) {
-        this.lendVideoCount = lendVideoCount;
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", point=" + point +
+                '}';
     }
 }
